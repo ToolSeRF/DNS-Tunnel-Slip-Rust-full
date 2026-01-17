@@ -1,0 +1,19 @@
+name: Fetch and Release bundle
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download file
+        run: |
+          wget -O slipstream_bundle.zip http://46.224.77.158:8030/slipstream_bundle.zip
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          files: slipstream_bundle.zip
