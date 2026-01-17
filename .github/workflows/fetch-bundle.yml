@@ -1,22 +1,24 @@
-name: Fetch and Release bundle
+name: Fetch bundle from URL
 
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  release:
+  download:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download file
-        run: |
-          wget -O slipstream_bundle.zip http://46.224.77.158:8030/slipstream_bundle.zip
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v1.0.0
-          files: slipstream_bundle.zip
+      - name: Download bundle
+        run: |
+          wget -O slipstream-linux-amd64-ubuntu24.04.zip http://46.224.77.158:8030/slipstream-linux-amd64-ubuntu24.04
+
+      - name: Commit file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add *.zip
+          git commit -m "Add bundle from external URL" || echo "Nothing to commit"
+          git push
