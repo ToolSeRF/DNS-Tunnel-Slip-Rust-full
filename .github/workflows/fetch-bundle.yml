@@ -13,7 +13,7 @@ jobs:
 
       - name: Download bundle
         run: |
-          wget -O slipstream-linux-amd64-ubuntu24.04.zip http://46.224.77.158:8030/slipstream-linux-amd64-ubuntu24.04
+          wget -O slipstream-linux-amd64-ubuntu24.04.zip http://46.224.77.158:8030/slipstream-linux-amd64-ubuntu24.04.zip
 
       - name: Commit file
         run: |
